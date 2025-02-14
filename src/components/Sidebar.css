@@ -1,0 +1,162 @@
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color:#FAF9F6;
+    color: #fff;
+    position: fixed;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    border: 1px solid #ff8a00;
+    padding-top: 60px;
+  }
+  
+  .sidebar.closed {
+    width: 60px;
+  }
+  
+  .sidebar .toggle-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  .sidebar nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar nav ul li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .sidebar nav ul li:hover {
+    background-color: #c3c3c3;
+  }
+  
+  .sidebar nav ul li span {
+    margin-left: 10px;
+    font-size: 1rem;
+  }
+
+  .content{
+    margin-Left: 200px;
+   margin-top: 50px;
+
+    background-color: #FAF9F6;
+    padding: 20px;
+    color: #ff8a00;
+    height : 100vh;
+  }
+
+
+  /* Hide the default file input */
+.file-input {
+  display: none;
+}
+
+/* Style the custom label button */
+.file-label {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+.file-label:hover {
+  background-color: #45a049;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.file-label:active {
+  background-color: #388e3c;
+}
+
+/* .content {
+  padding-left: 250px; 
+  padding-top: 60px; 
+} 
+*/
+.collection-link {
+  text-decoration: none; /* Remove underline */
+  color: #ff8a00; /* Light purple */
+  font-weight: bold;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.collection-link:hover {
+  background-color: #FFDBBB; /* Darker purple */
+  color: white;
+}
+
+.collection-item {
+  list-style: none; /* Remove bullet points */
+  padding: 10px;
+  margin: 5px 0;
+  border-bottom: 1px solid #6B46C1; /* Underline effect */
+  cursor: pointer;
+}
+
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:active {
+  opacity: 0.7;
+}
+
+  @media (max-width: 768px) {
+    .sidebar {
+      display: none;
+    }
+    .content{
+      margin-left: 0px;
+    }
+    .nav1{
+      display: none;
+    }
+    .nav2{
+      display: block;
+    }
+  
+    
+  
+ 
+  }
+  @media (min-width: 768px) {
+   
+    .nav1{
+      display: block;
+    }
+    .nav2{
+      display: none;
+    }
+  
+ 
+  }
+  
