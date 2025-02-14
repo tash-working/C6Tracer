@@ -4,10 +4,11 @@ import Sidebar from "./Sidebar";
 import { color } from "framer-motion";
 import './Sidebar.css'; // For styling
 
-const OthersDrafts = ({userId}) => {
+const OthersDrafts = ({ userId }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [expandedPostId, setExpandedPostId] = useState(null); // State to track expanded post
 
   // Declare hover state for post and image
   const [hoveredPostIndex, setHoveredPostIndex] = useState(null);
@@ -89,6 +90,17 @@ const OthersDrafts = ({userId}) => {
     boxShadow: '0 6px 12px rgba(0, 0, 0, 0.2)',
   };
 
+  const readMoreStyle = {
+    color: '#ff8a00',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    textDecoration: 'underline',
+  };
+
+  const handleReadMoreClick = (postId) => {
+    setExpandedPostId(postId === expandedPostId ? null : postId);
+  };
+
   return (
     <div style={contentStyle}>
       <h1>Posts</h1>
@@ -107,8 +119,18 @@ const OthersDrafts = ({userId}) => {
           >
             <div
               style={postContentStyle}
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{
+                __html: expandedPostId === post.id ? post.content : post.content.substring(0, 200) + '...',
+              }}
             />
+            {post.content.length > 200 && (
+              <div
+                style={readMoreStyle}
+                onClick={() => handleReadMoreClick(post.id)}
+              >
+                {expandedPostId === post.id ? 'Read less' : 'Read more...'}
+              </div>
+            )}
             <div style={imageContainerStyle}>
               {post.images.map((image, imgIndex) => (
                 <img

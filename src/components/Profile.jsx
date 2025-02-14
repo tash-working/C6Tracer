@@ -11,7 +11,8 @@ const Profile = ({ userId }) => {
   const [preview, setPreview] = useState(null); // Preview the image
   const [profile, setProfile] = useState({}); // User profile data
   const [profilePic, setProfilePic] = useState(""); // Profile picture URL
-  const [uploadedUrl, setUploadedUrl] = useState(null); // Store Cloudinary URL
+  const [uploadedUrl, setUploadedUrl] = useState(null);
+  const [ecoPoint, setEcoPoint] = useState(0); // Profile picture URL // Store Cloudinary URL
 
   // Fetch user profile data
   const fetchId = async () => {
@@ -25,6 +26,7 @@ const Profile = ({ userId }) => {
       const data = await response.json();
       setProfile(data[0]);
       setProfilePic(data[0].profilePic);
+      setEcoPoint(data[0].ecoPoint);
       console.log("Profile data fetched:", data[0]);
     } catch (err) {
       console.log(err.message);
@@ -88,7 +90,17 @@ const Profile = ({ userId }) => {
                 border: "2px solid #ff8a00",
               }}
             />
-            <h1>{profile.first_name} {profile.last_name}</h1>
+           <h1>
+                  {profile.first_name} {profile.last_name}{" "}
+                  {ecoPoint >= 300 && ecoPoint <= 499
+                    ? "🥉"
+                    : ecoPoint >= 500 && ecoPoint <= 999
+                      ? "🥈"
+                      : ecoPoint >= 1000
+                        ? "🥇"
+                        : ""}
+                </h1>
+                <h2>Eco Points: {ecoPoint}</h2>
             <p>{profile.bio}</p>
             <br />
           </div>

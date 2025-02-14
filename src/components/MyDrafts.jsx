@@ -8,6 +8,7 @@ const MyDrafts = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [expandedPostId, setExpandedPostId] = useState(null); // State to track expanded post
   const userId = JSON.parse(localStorage.getItem("id"));
 
   // Define state for hovered post and image index
@@ -53,6 +54,11 @@ const MyDrafts = () => {
     } catch (err) {
       console.error("Error deleting post:", err);
     }
+  };
+
+  // Function to handle "Read more" click
+  const handleReadMoreClick = (postId) => {
+    setExpandedPostId(postId === expandedPostId ? null : postId);
   };
 
   if (error) {
@@ -123,8 +129,9 @@ const MyDrafts = () => {
   };
 
   const deleteButtonStyle = {
-  
-  
+    position: "absolute",
+    top: "10px",
+    right: "10px",
     backgroundColor: "transparent",
     border: "none",
     color: "#ff4d4d",
@@ -137,6 +144,13 @@ const MyDrafts = () => {
     color: "#cc0000",
   };
 
+  const readMoreStyle = {
+    color: "#ff8a00",
+    cursor: "pointer",
+    fontWeight: "bold",
+    textDecoration: "underline",
+  };
+
   return (
     <div>
       <div style={navbarStyle}>
@@ -144,7 +158,7 @@ const MyDrafts = () => {
       </div>
       <div>
         <Sidebar />
-        <div  className="content">
+        <div className="content">
           <h1>Posts</h1>
           {posts.length === 0 ? (
             <p>No posts available</p>
@@ -182,8 +196,21 @@ const MyDrafts = () => {
                 </h3>
                 <div
                   style={postContentStyle}
-                  dangerouslySetInnerHTML={{ __html: post.content }}
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      expandedPostId === post._id
+                        ? post.content
+                        : post.content.substring(0, 200) + "...",
+                  }}
                 />
+                {post.content.length > 200 && (
+                  <div
+                    style={readMoreStyle}
+                    onClick={() => handleReadMoreClick(post._id)}
+                  >
+                    {expandedPostId === post._id ? "Read less" : "Read more..."}
+                  </div>
+                )}
                 <div style={imageContainerStyle}>
                   {post.images.map((image, imgIndex) => (
                     <img
