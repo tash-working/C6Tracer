@@ -18,7 +18,7 @@ const MyDrafts = () => {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/${userId}/api/posts`
+          `https://server-08ld.onrender.com/${userId}/api/posts`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch posts");
@@ -40,7 +40,7 @@ const MyDrafts = () => {
   const handleDeletePost = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/${userId}/api/posts/${postId}`,
+        `https://server-08ld.onrender.com/${userId}/api/posts/${postId}`,
         {
           method: "DELETE",
         }

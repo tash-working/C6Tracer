@@ -11,7 +11,7 @@ const Home = () => {
   // Fetch collections from the backend
   const fetchCollections = async () => {
     try {
-      const response = await fetch("http://localhost:5000/collections");
+      const response = await fetch("https://server-08ld.onrender.com/collections");
       if (!response.ok) {
         throw new Error("Failed to fetch collections");
       }
