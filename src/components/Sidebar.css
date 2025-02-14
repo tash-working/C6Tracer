@@ -6,7 +6,7 @@
     position: fixed;
     transition: width 0.3s ease;
     overflow: hidden;
-    border: 1px solid #ff8a00;
+    border: 1px solid #829b48;
     padding-top: 60px;
   }
   
@@ -50,7 +50,7 @@
 
     background-color: #FAF9F6;
     padding: 20px;
-    color: #ff8a00;
+    color: #829b48;
     height : 100vh;
   }
 
@@ -91,7 +91,7 @@
 */
 .collection-link {
   text-decoration: none; /* Remove underline */
-  color: #ff8a00; /* Light purple */
+  color: #829b48; /* Light purple */
   font-weight: bold;
   display: block;
   padding: 10px;

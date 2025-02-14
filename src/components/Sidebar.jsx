@@ -18,12 +18,12 @@ const Sidebar = () => {
             <Link
               to={`/${userId}/post`}
               style={{
-                color: "#ff8a00",
+                color: "#829b48",
                 textDecoration: "none",
                 transition: "color 0.3s",
               }}
-              onMouseEnter={(e) => (e.target.style.color = "#0096FF")}
-              onMouseLeave={(e) => (e.target.style.color = "#ff8a00")}
+              onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+              onMouseLeave={(e) => (e.target.style.color = "#829b48")}
             >
              
              <li>  <RiArticleFill />{isOpen && <span>Submit Report</span>}</li>
@@ -33,29 +33,29 @@ const Sidebar = () => {
             <Link
               to={`/${userId}/myDrafts`}
               style={{
-                color: "#ff8a00",
+                color: "#829b48",
                 textDecoration: "none",
                 transition: "color 0.3s",
               }}
-              onMouseEnter={(e) => (e.target.style.color = "#0096FF")}
-              onMouseLeave={(e) => (e.target.style.color = "#ff8a00")}
+              onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+              onMouseLeave={(e) => (e.target.style.color = "#829b48")}
             >
              
              <li>  <MdPermMedia />{isOpen && <span>My Draft</span>}</li>
             </Link>
             <hr style={{
-                color: "#ff8a00",
+                color: "#829b48",
                 
               }}/>
               <Link
               to={`/${userId}/donate`}
               style={{
-                color: "#ff8a00",
+                color: "#829b48",
                 textDecoration: "none",
                 transition: "color 0.3s",
               }}
-              onMouseEnter={(e) => (e.target.style.color = "#0096FF")}
-              onMouseLeave={(e) => (e.target.style.color = "#ff8a00")}
+              onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+              onMouseLeave={(e) => (e.target.style.color = "#829b48")}
             >
              
              <li>  <BiSolidDonateHeart />{isOpen && <span>Donate</span>}</li>
@@ -63,12 +63,12 @@ const Sidebar = () => {
             <Link
               to={`/${userId}/trade`}
               style={{
-                color: "#ff8a00",
+                color: "#829b48",
                 textDecoration: "none",
                 transition: "color 0.3s",
               }}
-              onMouseEnter={(e) => (e.target.style.color = "#0096FF")}
-              onMouseLeave={(e) => (e.target.style.color = "#ff8a00")}
+              onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+              onMouseLeave={(e) => (e.target.style.color = "#829b48")}
             >
              
              <li>  <FaExchangeAlt />{isOpen && <span>Trade</span>}</li>

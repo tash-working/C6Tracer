@@ -19,7 +19,7 @@ const MyDrafts = () => {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          `https://server-08ld.onrender.com/${userId}/api/posts`
+          `http://localhost:5000/${userId}/api/posts`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch posts");
@@ -41,7 +41,7 @@ const MyDrafts = () => {
   const handleDeletePost = async (postId) => {
     try {
       const response = await fetch(
-        `https://server-08ld.onrender.com/${userId}/api/posts/${postId}`,
+        `http://localhost:5000/${userId}/api/posts/${postId}`,
         {
           method: "DELETE",
         }
@@ -81,7 +81,7 @@ const MyDrafts = () => {
     marginLeft: "200px",
     backgroundColor: "#FAF9F6",
     padding: "20px",
-    color: "#ff8a00",
+    color: "#829b48",
   };
 
   const postContainerStyle = {
@@ -145,7 +145,7 @@ const MyDrafts = () => {
   };
 
   const readMoreStyle = {
-    color: "#ff8a00",
+    color: "#829b48",
     cursor: "pointer",
     fontWeight: "bold",
     textDecoration: "underline",

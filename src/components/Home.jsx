@@ -11,7 +11,7 @@ const Home = () => {
   // Fetch collections from the backend
   const fetchCollections = async () => {
     try {
-      const response = await fetch("https://server-08ld.onrender.com/collections");
+      const response = await fetch("http://localhost:5000/collections");
       if (!response.ok) {
         throw new Error("Failed to fetch collections");
       }
@@ -42,7 +42,7 @@ const Home = () => {
     marginTop: "50px",
     backgroundColor: "#FAF9F6",
     padding: "20px",
-    color: "#ff8a00",
+    color: "#829b48",
     height: "100vh",
   };
 

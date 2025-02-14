@@ -16,7 +16,7 @@ const Signup = () => {
     const handleCreateId = async (userId, data) => {
       try {
         const response = await fetch(
-          `https://server-08ld.onrender.com/${userId}/create_id`,
+          `http://localhost:5000/${userId}/create_id`,
           {
             method: "POST",
             headers: {

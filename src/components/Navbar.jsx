@@ -8,6 +8,7 @@ import supabase from "../helper/SupabaseClient";
 import { TiThMenu } from "react-icons/ti";
 import "./Sidebar.css";
 import leo from "./leo.png";
+import c6t from "./c6tbnobg.png";
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -48,9 +49,9 @@ const Navbar = () => {
         className="nav1"
         style={{
           backgroundColor: "#FAF9F6",
-          color: "#ff8a00",
+          color: "#829b48",
           padding: "10px 20px",
-          border: "1px solid #ff8a00",
+          border: "1px solid #829b48",
         }}
       >
         <div
@@ -66,18 +67,18 @@ const Navbar = () => {
             <Link
               to={`/${userId}`}
               style={{
-                color: "#ff8a00",
+                color: "#829b48",
                 textDecoration: "none",
                 transition: "color 0.3s",
               }}
-              onMouseEnter={(e) => (e.target.style.color = "#0096FF")}
-              onMouseLeave={(e) => (e.target.style.color = "#ff8a00")}
+              onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+              onMouseLeave={(e) => (e.target.style.color = "#829b48")}
             >
-              <img src={leo} alt="Leo" style={{
-                width: "24px",
-                height: "24px",
+              <img src={c6t} alt="Leo" style={{
+                // width: "24px",
+                height: "34px",
                 objectFit: "cover",
-                borderRadius: "50%",
+                // borderRadius: "50%",
               }} />
             </Link>
           </div>
@@ -99,12 +100,12 @@ const Navbar = () => {
               >
                 <MdOutlineSettings
                   style={{
-                    color: "#ff8a00",
+                    color: "#829b48",
                     fontSize: "1.5rem",
                     transition: "color 0.3s",
                   }}
-                  onMouseEnter={(e) => (e.target.style.color = "#0096FF")}
-                  onMouseLeave={(e) => (e.target.style.color = "#ff8a00")}
+                  onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+                  onMouseLeave={(e) => (e.target.style.color = "#829b48")}
                 />
                 {isDropdownOpen && (
                   <div
@@ -113,7 +114,7 @@ const Navbar = () => {
                       top: "100%",
                       right: 0,
                       backgroundColor: "#FAF9F6",
-                      border: "1px solid #ff8a00",
+                      border: "1px solid #829b48",
                       borderRadius: "4px",
                       padding: "10px",
                       zIndex: 1000,
@@ -125,7 +126,7 @@ const Navbar = () => {
                         <Link
                           to={`/${userId}/profile`}
                           style={{
-                            color: "#ff8a00",
+                            color: "#829b48",
                             textDecoration: "none",
                             transition: "color 0.3s",
                             display: "flex",
@@ -133,8 +134,8 @@ const Navbar = () => {
                             gap: "8px",
                             marginBottom: "10px",
                           }}
-                          onMouseEnter={(e) => (e.target.style.color = "#0096FF")}
-                          onMouseLeave={(e) => (e.target.style.color = "#ff8a00")}
+                          onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+                          onMouseLeave={(e) => (e.target.style.color = "#829b48")}
                         >
                           <MdAccountCircle style={{ fontSize: "1.25rem" }} />
                           My Profile
@@ -144,15 +145,15 @@ const Navbar = () => {
                         <Link
                           to={`/${userId}/admin`}
                           style={{
-                            color: "#ff8a00",
+                            color: "#829b48",
                             textDecoration: "none",
                             transition: "color 0.3s",
                             display: "flex",
                             alignItems: "center",
                             gap: "8px",
                           }}
-                          onMouseEnter={(e) => (e.target.style.color = "#0096FF")}
-                          onMouseLeave={(e) => (e.target.style.color = "#ff8a00")}
+                          onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+                          onMouseLeave={(e) => (e.target.style.color = "#829b48")}
                         >
                           <RiAdminFill style={{ fontSize: "1.25rem" }} />
                           Admin
@@ -161,7 +162,7 @@ const Navbar = () => {
                       <li>
                         <button
                           onClick={handleLogout}
-                          style={{ ...buttonStyle, backgroundColor: "#0096FF" }}
+                          style={{ ...buttonStyle, backgroundColor: "#ff8a00" }}
                         >
                           Logout
                         </button>
@@ -180,9 +181,9 @@ const Navbar = () => {
         className="nav2"
         style={{
           backgroundColor: "#FAF9F6",
-          color: "#ff8a00",
+          color: "#829b48",
           padding: "10px 20px",
-          border: "1px solid #ff8a00",
+          border: "1px solid #829b48",
         }}
       >
         <div
@@ -198,18 +199,18 @@ const Navbar = () => {
             <Link
               to={`/${userId}`}
               style={{
-                color: "#ff8a00",
+                color: "#829b48",
                 textDecoration: "none",
                 transition: "color 0.3s",
               }}
-              onMouseEnter={(e) => (e.target.style.color = "#0096FF")}
-              onMouseLeave={(e) => (e.target.style.color = "#ff8a00")}
+              onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+              onMouseLeave={(e) => (e.target.style.color = "#829b48")}
             >
-              <img src={leo} alt="Leo" style={{
-                width: "24px",
-                height: "24px",
+              <img src={c6t} alt="Leo" style={{
+                // width: "24px",
+                height: "34px",
                 objectFit: "cover",
-                borderRadius: "50%",
+                // borderRadius: "50%",
               }} />
             </Link>
           </div>
@@ -231,12 +232,12 @@ const Navbar = () => {
               >
                 <TiThMenu
                   style={{
-                    color: "#ff8a00",
+                    color: "#829b48",
                     fontSize: "1.5rem",
                     transition: "color 0.3s",
                   }}
-                  onMouseEnter={(e) => (e.target.style.color = "#0096FF")}
-                  onMouseLeave={(e) => (e.target.style.color = "#ff8a00")}
+                  onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+                  onMouseLeave={(e) => (e.target.style.color = "#829b48")}
                 />
                 {isDropdownOpen && (
                   <div
@@ -245,7 +246,7 @@ const Navbar = () => {
                       top: "100%",
                       right: 0,
                       backgroundColor: "#FAF9F6",
-                      border: "1px solid #ff8a00",
+                      border: "1px solid #829b48",
                       borderRadius: "4px",
                       padding: "10px",
                       zIndex: 1000,
@@ -257,7 +258,7 @@ const Navbar = () => {
                         <Link
                           to={`/${userId}/profile`}
                           style={{
-                            color: "#ff8a00",
+                            color: "#829b48",
                             textDecoration: "none",
                             transition: "color 0.3s",
                             display: "flex",
@@ -265,8 +266,8 @@ const Navbar = () => {
                             gap: "8px",
                             marginBottom: "10px",
                           }}
-                          onMouseEnter={(e) => (e.target.style.color = "#0096FF")}
-                          onMouseLeave={(e) => (e.target.style.color = "#ff8a00")}
+                          onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+                          onMouseLeave={(e) => (e.target.style.color = "#829b48")}
                         >
                           <MdAccountCircle style={{ fontSize: "1.25rem" }} />
                           My Profile
@@ -276,7 +277,7 @@ const Navbar = () => {
                         <Link
                           to={`/${userId}/post`}
                           style={{
-                            color: "#ff8a00",
+                            color: "#829b48",
                             textDecoration: "none",
                             transition: "color 0.3s",
                             display: "flex",
@@ -284,8 +285,8 @@ const Navbar = () => {
                             gap: "8px",
                             marginBottom: "10px",
                           }}
-                          onMouseEnter={(e) => (e.target.style.color = "#0096FF")}
-                          onMouseLeave={(e) => (e.target.style.color = "#ff8a00")}
+                          onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+                          onMouseLeave={(e) => (e.target.style.color = "#829b48")}
                         >
                           <RiArticleFill style={{ fontSize: "1.25rem" }} />
                           Report
@@ -295,7 +296,7 @@ const Navbar = () => {
                         <Link
                           to={`/${userId}/myDrafts`}
                           style={{
-                            color: "#ff8a00",
+                            color: "#829b48",
                             textDecoration: "none",
                             transition: "color 0.3s",
                             display: "flex",
@@ -303,8 +304,8 @@ const Navbar = () => {
                             gap: "8px",
                             marginBottom: "10px",
                           }}
-                          onMouseEnter={(e) => (e.target.style.color = "#0096FF")}
-                          onMouseLeave={(e) => (e.target.style.color = "#ff8a00")}
+                          onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+                          onMouseLeave={(e) => (e.target.style.color = "#829b48")}
                         >
                           <MdPermMedia style={{ fontSize: "1.25rem" }} />
                           Drafts
@@ -314,7 +315,7 @@ const Navbar = () => {
                         <Link
                           to={`/${userId}/admin`}
                           style={{
-                            color: "#ff8a00",
+                            color: "#829b48",
                             textDecoration: "none",
                             transition: "color 0.3s",
                             display: "flex",
@@ -322,8 +323,8 @@ const Navbar = () => {
                             gap: "8px",
                             marginBottom: "10px",
                           }}
-                          onMouseEnter={(e) => (e.target.style.color = "#0096FF")}
-                          onMouseLeave={(e) => (e.target.style.color = "#ff8a00")}
+                          onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+                          onMouseLeave={(e) => (e.target.style.color = "#829b48")}
                         >
                           <RiAdminFill style={{ fontSize: "1.25rem" }} />
                           Admin
@@ -332,7 +333,7 @@ const Navbar = () => {
                       <li>
                         <button
                           onClick={handleLogout}
-                          style={{ ...buttonStyle, backgroundColor: "#0096FF" }}
+                          style={{ ...buttonStyle, backgroundColor: "#ff8a00" }}
                         >
                           Logout
                         </button>

@@ -8,7 +8,7 @@ const OtherUsers = ({ id }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`https://server-08ld.onrender.com/${id}/get_id`);
+        const response = await fetch(`http://localhost:5000/${id}/get_id`);
         if (!response.ok) {
           throw new Error("Failed to fetch profile data");
         }
@@ -54,7 +54,7 @@ const styles = {
     height: "50px",
     borderRadius: "50%",
     objectFit: "cover",
-    border: "2px solid #ff8a00",
+    border: "2px solid #829b48",
   },
   name: {
     fontSize: "16px",

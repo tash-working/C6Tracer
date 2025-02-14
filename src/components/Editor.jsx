@@ -91,7 +91,7 @@ const Editor = () => {
       }
 
       // Send content and image URLs to the backend
-      const response = await fetch(`https://server-08ld.onrender.com/${userId}/api/posts`, {
+      const response = await fetch(`http://localhost:5000/${userId}/api/posts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -121,7 +121,7 @@ const Editor = () => {
       flexDirection: "column",
       alignItems: "center",
       padding: "16px",
-      border: "2px dashed #ff8a00",
+      border: "2px dashed #829b48",
       borderRadius: "12px",
       backgroundColor: "#fffaf0",
       cursor: "pointer",
@@ -132,7 +132,7 @@ const Editor = () => {
       alignItems: "center",
       gap: "8px",
       padding: "10px 20px",
-      backgroundColor: "#ff8a00",
+      backgroundColor: "#829b48",
       color: "#fff",
       fontWeight: "bold",
       borderRadius: "8px",
@@ -250,7 +250,7 @@ const Editor = () => {
           <button
             onClick={handlePost}
             style={{
-              backgroundColor: "#0096FF",
+              backgroundColor: "#ff8a00",
               color: "#1A202C",
               padding: "8px 16px",
               borderRadius: "4px",
@@ -260,10 +260,10 @@ const Editor = () => {
             }}
             onMouseEnter={(e) => {
               e.target.style.backgroundColor = "#6B46C1";
-              e.target.style.color = "#ff8a00";
+              e.target.style.color = "#829b48";
             }}
             onMouseLeave={(e) => {
-              e.target.style.backgroundColor = "#0096FF";
+              e.target.style.backgroundColor = "#ff8a00";
               e.target.style.color = "#1A202C";
             }}
           >

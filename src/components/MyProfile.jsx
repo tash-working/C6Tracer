@@ -7,6 +7,7 @@ import "./Sidebar.css"; // For styling
 import leo from "./leo.png";
 import PlasticInfo from "./PlasticInfo";
 import EditProfile from "./EditProfile"; // Import the new component
+import CarbonFootprintCalculator from "./CarbonFootprintCalculator";
 
 const MyProfile = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const MyProfile = () => {
   // Fetch profile data
   const fetchId = async () => {
     try {
-      const response = await fetch(`https://server-08ld.onrender.com/${userId}/get_id`);
+      const response = await fetch(`http://localhost:5000/${userId}/get_id`);
       if (!response.ok) {
         throw new Error("Failed to fetch profile data");
       }
@@ -118,7 +119,7 @@ const MyProfile = () => {
   // Send the uploaded image URL to the backend
   const sendUrlToBackend = async (imageUrl) => {
     try {
-      const response = await fetch(`https://server-08ld.onrender.com/${userId}/uploadPP`, {
+      const response = await fetch(`http://localhost:5000/${userId}/uploadPP`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -147,7 +148,7 @@ const MyProfile = () => {
   // Save edited profile data
   const handleSaveProfile = async () => {
     try {
-      const response = await fetch(`https://server-08ld.onrender.com/${userId}/updateProfile`, {
+      const response = await fetch(`http://localhost:5000/${userId}/updateProfile`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -238,7 +239,7 @@ const MyProfile = () => {
                     height: "100px",
                     objectFit: "cover",
                     borderRadius: "50%",
-                    border: "2px solid #ff8a00",
+                    border: "2px solid #829b48",
                   }}
                 />
                 <h1>
@@ -317,6 +318,7 @@ const MyProfile = () => {
           <br />
 
           <PlasticInfo />
+          <CarbonFootprintCalculator/>
 
         </div>
       </div>

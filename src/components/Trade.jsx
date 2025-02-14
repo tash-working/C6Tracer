@@ -24,7 +24,7 @@ const Trade = () => {
     marginTop: "50px",
     backgroundColor: "#FAF9F6",
     padding: "20px",
-    color: "#ff8a00",
+    color: "#829b48",
     height: "100vh",
   };
 

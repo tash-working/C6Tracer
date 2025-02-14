@@ -18,7 +18,7 @@ const Profile = ({ userId }) => {
   const fetchId = async () => {
     try {
       const response = await fetch(
-        `https://server-08ld.onrender.com/${userId}/get_id`
+        `http://localhost:5000/${userId}/get_id`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch profile data");
@@ -87,7 +87,7 @@ const Profile = ({ userId }) => {
                 height: "100px",
                 objectFit: "cover",
                 borderRadius: "50%",
-                border: "2px solid #ff8a00",
+                border: "2px solid #829b48",
               }}
             />
            <h1>
