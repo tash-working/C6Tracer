@@ -10,80 +10,344 @@ const plastics = [
   { id: 6, name: "PS", symbol: "♸", co2PerKg: 3.4 },
 ];
 
-function CarbonFootprintCalculator() {
+function CarbonFootprintCalculator({ plasticData }) {
   const [amounts, setAmounts] = useState({});
+  const [totalPlastics, setTotalPlastics] = useState({});
   const [savedCO2, setSavedCO2] = useState(0);
+  const [totalPlasticSaved, setTotalPlasticSaved] = useState(0);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  const userId = JSON.parse(localStorage.getItem("id"));
 
   useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("plasticsData")) || {};
-    setAmounts(savedData);
-    calculateCO2(savedData);
+    const fetchId = async () => {
+      try {
+        const response = await fetch(`https://server-08ld.onrender.com/${userId}/get_id`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch profile data");
+        }
+        const data = await response.json();
+        const savedData = data[0].plasticData || {};
+        setTotalPlastics(savedData);
+        calculateCO2(savedData);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    fetchId();
   }, []);
 
   const handleChange = (id, value) => {
-    const updatedAmounts = { ...amounts, [id]: value };
-    setAmounts(updatedAmounts);
-    calculateCO2(updatedAmounts);
+    setAmounts((prev) => ({ ...prev, [id]: value }));
   };
 
   const calculateCO2 = (data) => {
     let totalCO2 = 0;
+    let totalPlastic = 0;
     plastics.forEach(({ id, co2PerKg }) => {
-      totalCO2 += (data[id] || 0) * co2PerKg;
+      const amount = data[id] || 0;
+      totalCO2 += amount * co2PerKg;
+      totalPlastic += amount;
     });
     setSavedCO2(totalCO2);
+    setTotalPlasticSaved(totalPlastic);
   };
 
-  const handleSubmit = () => {
-    localStorage.setItem("plasticsData", JSON.stringify(amounts));
+  const handleSubmit = async () => {
+    try {
+      const existingData = JSON.parse(localStorage.getItem("plasticsData")) || {};
+      const updatedData = { ...existingData };
+
+      plastics.forEach(({ id }) => {
+        if (amounts[id]) {
+          updatedData[id] = (updatedData[id] || 0) + amounts[id];
+        }
+      });
+
+      const response = await fetch(`https://server-08ld.onrender.com/${userId}/updatePlasticData`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedData),
+      });
+
+      if (response.ok) {
+        localStorage.setItem("plasticsData", JSON.stringify(updatedData));
+        setTotalPlastics(updatedData);
+        calculateCO2(updatedData);
+        setMessage("Data saved successfully!");
+        setAmounts({});
+      } else {
+        throw new Error("Failed to save data");
+      }
+    } catch (error) {
+      console.error("Error saving data:", error);
+      setError("Error saving data: " + error.message);
+    }
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", background: "linear-gradient(to bottom right, #a8e6cf, #56cfe1)" }}>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        style={{ width: "100%", maxWidth: "500px", padding: "20px", background: "white", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)", borderRadius: "20px", border: "4px solid #38a169", textAlign: "center" }}
-      >
-        <h1 style={{ fontSize: "24px", fontWeight: "bold", color: "#2d3748" }}>♻️ Carbon Footprint Calculator</h1>
-        <p style={{ color: "#4a5568" }}>Enter your plastic usage (kg) below:</p>
+    <div className="container">
+      <motion.div className="card" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}>
+        <h1>♻️ Carbon Footprint Calculator</h1>
+        <p>Enter your plastic usage (kg) below:</p>
 
         {plastics.map(({ id, name, symbol }) => (
-          <div key={id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#edf2f7", padding: "10px", margin: "10px 0", borderRadius: "10px", border: "1px solid #cbd5e0" }}>
-            <span style={{ fontWeight: "bold", color: "#2d3748" }}>{symbol} {name}</span>
-            <input
-              type="number"
-              value={amounts[id] || ""}
-              onChange={(e) => handleChange(id, parseFloat(e.target.value) || 0)}
-              style={{ width: "60px", padding: "5px", border: "1px solid #a0aec0", borderRadius: "8px", textAlign: "center" }}
-            />
+          <div key={id} className="input-group">
+            <span>{symbol} {name}</span>
+            <input type="number" value={amounts[id] || ""} onChange={(e) => handleChange(id, parseFloat(e.target.value) || 0)} />
           </div>
         ))}
 
-        <button
-          onClick={handleSubmit}
-          style={{ marginTop: "10px", padding: "10px 20px", background: "#38a169", color: "white", fontWeight: "bold", borderRadius: "10px", border: "none", cursor: "pointer", transition: "background 0.3s" }}
-          onMouseOver={(e) => e.target.style.background = "#2f855a"}
-          onMouseOut={(e) => e.target.style.background = "#38a169"}
-        >
-          Save Data
-        </button>
+        {message && <p className="success">{message}</p>}
+        {error && <p className="error">{error}</p>}
 
-        <div style={{ marginTop: "20px" }}>
-          <h2 style={{ fontSize: "20px", fontWeight: "bold", color: "#2d3748" }}>CO2 Saved: {savedCO2.toFixed(2)} kg</h2>
-          <div style={{ width: "100%", background: "#e2e8f0", height: "20px", borderRadius: "10px", marginTop: "10px" }}>
-            <motion.div
-              style={{ height: "20px", background: "#38a169", borderRadius: "10px" }}
-              initial={{ width: 0 }}
-              animate={{ width: `${Math.min(savedCO2, 100)}%` }}
-              transition={{ duration: 0.5 }}
-            ></motion.div>
+        <button onClick={handleSubmit} className="save-button">Save Data</button>
+      </motion.div>
+
+      <motion.div className="card" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+        <h2>🌍 Your Plastic Collection</h2>
+        {plastics.map(({ id, name, symbol, co2PerKg }) => (
+          <div key={id} className="summary">
+            <span>{symbol} {name}:</span>
+            <span>{totalPlastics[id] || 0} kg ({((totalPlastics[id] || 0) * co2PerKg).toFixed(2)} kg CO2)</span>
           </div>
-        </div>
+        ))}
+
+        <h2>Total Plastic Saved: {totalPlasticSaved.toFixed(2)} kg</h2>
+        <h2>Total CO2 Saved: {savedCO2.toFixed(2)} kg</h2>
       </motion.div>
     </div>
   );
 }
 
 export default CarbonFootprintCalculator;
+
+// CSS Styling
+const styles = `
+/* CSS Styling */
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: #f5f5f5;
+  min-height: auto;
+  height: fit-content;
+}
+
+.card {
+  flex: 1;
+  min-width: 280px;
+  max-width: 450px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  text-align: center;
+  border: 1px solid #ddd;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card h1 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.card h2 {
+  font-size: 1.4rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.input-group span {
+  font-size: 1rem;
+  color: #34495e;
+  flex: 1 1 100%;
+  margin-bottom: 6px;
+}
+
+.input-group input {
+  width: 60%;
+  padding: 8px;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #2c3e50;
+  transition: border-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.input-group input:focus {
+  border-color: #2980b9;
+  outline: none;
+}
+
+.save-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.save-button:hover {
+  background-color: #2980b9;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  padding: 8px;
+  background-color: #ecf0f1;
+  border-radius: 8px;
+}
+
+.summary span {
+  font-size: 0.9rem;
+  color: #34495e;
+}
+
+.success {
+  color: #27ae60;
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    gap: 1rem;
+    
+  }
+
+  .card {
+    width: 100%;
+    padding: 15px;
+    min-width: 100%;
+  }
+
+  .card h1 {
+    font-size: 1.5rem;
+  }
+
+  .card h2 {
+    font-size: 1.2rem;
+  }
+
+  .input-group {
+    margin: 8px 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .input-group span {
+    font-size: 0.9rem;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 6px;
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+
+  .save-button {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+
+  .summary {
+    margin: 6px 0;
+    padding: 6px;
+  }
+
+  .summary span {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
+    gap: 0.5rem;
+   
+  }
+
+  .card {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .card h1 {
+    font-size: 1.3rem;
+  }
+
+  .card h2 {
+    font-size: 1.1rem;
+  }
+
+  .input-group {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 6px 0;
+  }
+
+  .input-group span {
+    font-size: 0.8rem;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 6px;
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+
+  .save-button {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+
+  .summary {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 4px 0;
+    padding: 6px;
+  }
+
+  .summary span {
+    font-size: 0.8rem;
+    margin: 4px 0;
+  }
+}
+
+`;
+document.head.insertAdjacentHTML("beforeend", `<style>${styles}</style>`);

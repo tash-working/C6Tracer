@@ -5,14 +5,21 @@ import Sidebar from "./Sidebar";
 import supabase from "../helper/SupabaseClient";
 import "./Sidebar.css"; // For styling
 import OthersDrafts from "./OthersDrafts";
+import CarbonFootprint from "./CarbonFootPrint";
 
 const Profile = ({ userId }) => {
   const navigate = useNavigate();
-  const [preview, setPreview] = useState(null); // Preview the image
-  const [profile, setProfile] = useState({}); // User profile data
-  const [profilePic, setProfilePic] = useState(""); // Profile picture URL
-  const [uploadedUrl, setUploadedUrl] = useState(null);
-  const [ecoPoint, setEcoPoint] = useState(0); // Profile picture URL // Store Cloudinary URL
+   const [preview, setPreview] = useState(null); // Preview the image
+   const [profile, setProfile] = useState({}); // Profile data
+   const [profilePic, setProfilePic] = useState(""); // Profile picture URL
+   const [ecoPoint, setEcoPoint] = useState(0); // Profile picture URL
+   const [showEditProfile, setShowEditProfile] = useState(false); // Show edit profile form
+   const [uploadedUrl, setUploadedUrl] = useState(null); // Store Cloudinary URL
+   const [editData, setEditData] = useState({}); // Store edited profile data
+  //  const userId = JSON.parse(localStorage.getItem("id"));
+   const [showPlasticInfo, setShowPlasticInfo] = useState(false);
+   const [plasticData, SetPlasticData] = useState({});
+ // Profile picture URL // Store Cloudinary URL
 
   // Fetch user profile data
   const fetchId = async () => {
@@ -27,7 +34,7 @@ const Profile = ({ userId }) => {
       setProfile(data[0]);
       setProfilePic(data[0].profilePic);
       setEcoPoint(data[0].ecoPoint);
-      console.log("Profile data fetched:", data[0]);
+      SetPlasticData(data[0].plasticData || {});
     } catch (err) {
       console.log(err.message);
     }
@@ -103,6 +110,9 @@ const Profile = ({ userId }) => {
                 <h2>Eco Points: {ecoPoint}</h2>
             <p>{profile.bio}</p>
             <br />
+          </div>
+          <div>
+            <CarbonFootprint plasticData={plasticData} />
           </div>
 
           {/* Display OthersDrafts component */}

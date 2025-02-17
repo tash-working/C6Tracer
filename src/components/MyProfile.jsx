@@ -8,6 +8,8 @@ import leo from "./leo.png";
 import PlasticInfo from "./PlasticInfo";
 import EditProfile from "./EditProfile"; // Import the new component
 import CarbonFootprintCalculator from "./CarbonFootprintCalculator";
+import { GiCancel } from "react-icons/gi";
+import { RiInformation2Fill, RiInformationOffFill } from "react-icons/ri";
 
 const MyProfile = () => {
   const navigate = useNavigate();
@@ -19,6 +21,8 @@ const MyProfile = () => {
   const [uploadedUrl, setUploadedUrl] = useState(null); // Store Cloudinary URL
   const [editData, setEditData] = useState({}); // Store edited profile data
   const userId = JSON.parse(localStorage.getItem("id"));
+  const [showPlasticInfo, setShowPlasticInfo] = useState(false);
+  const [plasticData, SetPlasticData] = useState({});
 
   // Fetch profile data
   const fetchId = async () => {
@@ -27,16 +31,22 @@ const MyProfile = () => {
       if (!response.ok) {
         throw new Error("Failed to fetch profile data");
       }
+
       const data = await response.json();
       setProfile(data[0]);
       setProfilePic(data[0].profilePic);
       setEcoPoint(data[0].ecoPoint);
       setEditData(data[0]); // Initialize editData with fetched data
-      localStorage.setItem("profileData", JSON.stringify(data[0])); // Store in local storage
+      SetPlasticData(data[0].plasticData || {});
+      // Store in local storage
+      localStorage.setItem("profileData", JSON.stringify(data[0]));
+      localStorage.setItem("plasticsData", JSON.stringify(data[0].plasticData || [])); // Store empty array if undefined
+
     } catch (err) {
       console.log(err.message);
     }
   };
+
 
   // Load profile data from local storage on component mount
   useEffect(() => {
@@ -312,14 +322,48 @@ const MyProfile = () => {
           </div>
 
           <div>
-            {profile.bio === "" ? <p>No bio available</p> : <p>{profile.bio}</p>}
+
+
+            {/* Render Carbon Footprint Calculator only if userId exists */}
+
           </div>
 
           <br />
 
-          <PlasticInfo />
-          <CarbonFootprintCalculator/>
+          <div>
+            {
+              !showPlasticInfo && (<spam onClick={() => setShowPlasticInfo(true)} ><span className="close" onClick={() => setShowPlasticInfo(false)}><RiInformation2Fill
+              style={{
+                color: "#829b48",
+                fontSize: "1.5rem",
+                transition: "color 0.3s",
+                cursor: "pointer",
+              }}
+              // onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+              // onMouseLeave={(e) => (e.target.style.color = "#829b48")}
+            /></span></spam>
+              )
+            }
+            {showPlasticInfo && (
+              <div className="popup">
+                <div className="popup-content">
+                  <span className="close" onClick={() => setShowPlasticInfo(false)}><RiInformationOffFill
+                    style={{
+                      color: "#829b48",
+                      fontSize: "1.5rem",
+                      transition: "color 0.3s",
+                      cursor: "pointer",
+                    }}
+                    // onMouseEnter={(e) => (e.target.style.color = "#ff8a00")}
+                    // onMouseLeave={(e) => (e.target.style.color = "#829b48")}
+                  /></span>
+                  <PlasticInfo />
+                </div>
+              </div>
+            )}
+          </div>
 
+          {userId ? <CarbonFootprintCalculator plasticData={plasticData}/> : <p>Loading...</p>}
         </div>
       </div>
     </div>
