@@ -10,6 +10,9 @@ import EditProfile from "./EditProfile"; // Import the new component
 import CarbonFootprintCalculator from "./CarbonFootprintCalculator";
 import { GiCancel } from "react-icons/gi";
 import { RiInformation2Fill, RiInformationOffFill } from "react-icons/ri";
+import gold from "./gold-01.png";
+import silver from "./silver-01.png";
+import bronz from "./bronz-01.png";
 
 const MyProfile = () => {
   const navigate = useNavigate();
@@ -255,11 +258,41 @@ const MyProfile = () => {
                 <h1>
                   {profile.first_name} {profile.last_name}{" "}
                   {ecoPoint >= 300 && ecoPoint <= 499
-                    ? "🥉"
+                    ? <img
+                    src={bronz}
+                    alt="Leo"
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      objectFit: "cover",
+                      borderRadius: "50%",
+                      border: "2px solid bronze",
+                    }}
+                  />
                     : ecoPoint >= 500 && ecoPoint <= 999
-                      ? "🥈"
+                      ? <img
+                      src={silver}
+                      alt="Leo"
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        objectFit: "cover",
+                        borderRadius: "50%",
+                        border: "2px solid solver",
+                      }}
+                    />
                       : ecoPoint >= 1000
-                        ? "🥇"
+                        ? <img
+                        src={gold}
+                        alt="Leo"
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          objectFit: "cover",
+                          borderRadius: "50%",
+                          border: "2px solid gold",
+                        }}
+                      />
                         : ""}
                 </h1>
                 <h2>Eco Points: {ecoPoint}</h2>
