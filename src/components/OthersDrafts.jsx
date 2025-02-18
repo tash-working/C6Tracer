@@ -5,22 +5,14 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import parse from "html-react-parser";
 
-const MyDrafts = () => {
+const OthersDrafts = ({ userId }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [expandedPostId, setExpandedPostId] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const userId = JSON.parse(localStorage.getItem("id"));
-
   useEffect(() => {
-    if (!userId) {
-      setError("User ID not found. Please log in.");
-      setLoading(false);
-      return;
-    }
-
     const fetchPosts = async () => {
       try {
         const response = await fetch(`https://server-08ld.onrender.com/${userId}/api/posts`);
@@ -53,7 +45,6 @@ const MyDrafts = () => {
 
   const styles = {
     content: {
-      marginLeft: "250px",
       padding: "20px",
     },
     postContainer: {
@@ -64,6 +55,15 @@ const MyDrafts = () => {
       boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
     },
     readMore: {
+      background: "none",
+      border: "none",
+      color: "#007bff",
+      cursor: "pointer",
+      fontWeight: "bold",
+      textDecoration: "underline",
+      marginTop: "10px",
+    },
+    readLess: {
       background: "none",
       border: "none",
       color: "#007bff",
@@ -135,53 +135,61 @@ const MyDrafts = () => {
 
   return (
     <div>
-   <div >
-          <h1>Posts</h1>
-          {posts.length === 0 ? (
-            <p>No posts available</p>
-          ) : (
-            posts.map((post, index) => (
-              <div key={index} style={styles.postContainer}>
-                <h3>
-                  {new Date(post.createdAt).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </h3>
+      <div style={styles.content}>
+        <h1>Posts</h1>
+        {posts.length === 0 ? (
+          <p>No posts available</p>
+        ) : (
+          posts.map((post, index) => (
+            <div key={index} style={styles.postContainer}>
+              <h3>
+                {new Date(post.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </h3>
 
-                <div style={styles.postContent}>
-                  {expandedPostId === post._id ? (
-                    parse(post.content)
-                  ) : (
-                    <>
-                      {parse(post.content.substring(0, 200))}...
-                      <button
-                        onClick={() => handleReadMoreClick(post._id)}
-                        style={styles.readMore}
-                      >
-                        See More
-                      </button>
-                    </>
-                  )}
-                </div>
-
-                <div style={styles.imageContainer}>
-                  {post.images.map((image, imgIndex) => (
-                    <LazyLoadImage
-                      key={imgIndex}
-                      src={image}
-                      alt="Post"
-                      effect="blur"
-                      style={styles.postImage}
-                      onClick={() => handleImageClick(image)}
-                    />
-                  ))}
-                </div>
+              <div style={styles.postContent}>
+                {expandedPostId === post._id ? (
+                  <>
+                    {parse(post.content)}
+                    <button
+                      onClick={() => handleReadMoreClick(post._id)}
+                      style={styles.readLess}
+                    >
+                      See Less
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    {parse(post.content.substring(0, 200))}...
+                    <button
+                      onClick={() => handleReadMoreClick(post._id)}
+                      style={styles.readMore}
+                    >
+                      See More
+                    </button>
+                  </>
+                )}
               </div>
-            ))
-          )}
-        </div>
+
+              <div style={styles.imageContainer}>
+                {post.images.map((image, imgIndex) => (
+                  <LazyLoadImage
+                    key={imgIndex}
+                    src={image}
+                    alt="Post"
+                    effect="blur"
+                    style={styles.postImage}
+                    onClick={() => handleImageClick(image)}
+                  />
+                ))}
+              </div>
+            </div>
+          ))
+        )}
+      </div>
 
       {selectedImage && (
         <div style={styles.modal}>
@@ -195,4 +203,4 @@ const MyDrafts = () => {
   );
 };
 
-export default MyDrafts;
+export default OthersDrafts;
