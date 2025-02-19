@@ -7,6 +7,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import parse from "html-react-parser";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import LikeComment from "./LikeComment";
 
 const MyDrafts = () => {
   const [posts, setPosts] = useState([]);
@@ -33,6 +34,8 @@ const MyDrafts = () => {
           throw new Error("Failed to fetch posts");
         }
         const data = await response.json();
+        console.log("Posts fetched successfully:", data);
+        
         setPosts(data);
       } catch (err) {
         setError(err.message);
@@ -314,6 +317,7 @@ const MyDrafts = () => {
                     />
                   ))}
                 </div>
+                <LikeComment userId={userId} post={post}/>
               </div>
             ))
           )}
@@ -328,6 +332,8 @@ const MyDrafts = () => {
           </button>
         </div>
       )}
+   
+     
     </div>
   );
 };

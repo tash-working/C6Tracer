@@ -62,9 +62,9 @@ const Home = () => {
           <ul>
             {collections.length > 0 ? (
               collections.map((collection, index) => (
-                <Link to={`/${collection}/profile`} className="collection-link">
+                <Link  key={index} to={`/${collection}/profile`} className="collection-link">
                 {/* <li key={index} className="collection-item">{collection}</li> */}
-                <div key={index} >
+                <div >
                 <OtherUsers id={collection} />
                 </div>
                

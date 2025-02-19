@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import parse from "html-react-parser";
+import LikeComment from "./LikeComment";
 
 const OthersDrafts = ({ userId }) => {
   const [posts, setPosts] = useState([]);
@@ -186,6 +187,7 @@ const OthersDrafts = ({ userId }) => {
                   />
                 ))}
               </div>
+              <LikeComment userId={userId} post={post}/>
             </div>
           ))
         )}
