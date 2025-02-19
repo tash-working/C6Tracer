@@ -3,7 +3,7 @@ import Comment from "./Comment"; // Import the Comment component
 
 const LikeComment = ({ userId, post }) => {
   const [likes, setLikes] = useState(post.like || 0);
-  const [liked, setLiked] = useState(post.likedBy?.includes(userId) || false);
+  const [liked, setLiked] = useState(post.likedBy?.includes(JSON.parse(localStorage.getItem("id"))) || false);
   const [showComment, setShowComment] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState(post.Comment || []);
