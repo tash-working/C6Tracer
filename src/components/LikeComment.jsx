@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaThumbsUp, FaRegThumbsUp, FaCommentAlt } from "react-icons/fa";
 import Comment from "./Comment"; // Import the Comment component
 
 const LikeComment = ({ userId, post }) => {
@@ -73,39 +74,41 @@ const LikeComment = ({ userId, post }) => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px", padding: "10px", border: "1px solid #ddd", borderRadius: "8px", backgroundColor: "#f9f9f9" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
         <button
           style={{
-            backgroundColor: liked ? "#28a745" : "#007bff",
-            color: "white",
+            backgroundColor: "transparent",
+            color: liked ? "#28a745" : "#007bff",
             border: "none",
-            padding: "8px 12px",
             cursor: "pointer",
-            borderRadius: "5px",
-            transition: "background 0.3s",
+            fontSize: "18px",
+            display: "flex",
+            alignItems: "center",
+            gap: "5px",
           }}
           onClick={handleLike}
         >
-          {liked ? "Unlike" : "Like"} ({likes})
+          {liked ? <FaThumbsUp /> : <FaRegThumbsUp />} ({likes})
         </button>
         <button
           style={{
-            backgroundColor: "#007bff",
-            color: "white",
+            backgroundColor: "transparent",
+            color: "#007bff",
             border: "none",
-            padding: "8px 12px",
             cursor: "pointer",
-            borderRadius: "5px",
-            transition: "background 0.3s",
+            fontSize: "18px",
+            display: "flex",
+            alignItems: "center",
+            gap: "5px",
           }}
           onClick={() => setShowComment(!showComment)}
         >
-          Comment
+          <FaCommentAlt /> ({comments.length})
         </button>
       </div>
       {showComment && (
-        <div style={{ marginTop: "10px" }}>
+        <div style={{ marginTop: "10px", padding: "10px", backgroundColor: "white", borderRadius: "5px", border: "1px solid #ccc" }}>
           <input
             type="text"
             placeholder="Write a comment..."
@@ -113,7 +116,7 @@ const LikeComment = ({ userId, post }) => {
             onChange={(e) => setComment(e.target.value)}
             style={{
               width: "100%",
-              padding: "6px",
+              padding: "8px",
               border: "1px solid #ccc",
               borderRadius: "5px",
             }}
@@ -128,11 +131,13 @@ const LikeComment = ({ userId, post }) => {
               padding: "6px 12px",
               cursor: "pointer",
               borderRadius: "5px",
+              display: "block",
+              width: "100%",
             }}
           >
             Post
           </button>
-          <div style={{ marginTop: "10px" }}>
+          <div style={{ marginTop: "10px", maxHeight: "200px", overflowY: "auto" }}>
             {comments.map((c, index) => (
               <Comment key={index} c={c} />
             ))}
