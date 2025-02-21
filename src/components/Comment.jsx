@@ -25,8 +25,9 @@ const Comment = ({ c }) => {
     <div style={styles.commentContainer}>
       <Link to={`/${c.userId}/profile`} style={styles.profileLink}>
         <img src={profile.profilePic} alt="Leo" style={styles.profileImage} />
-        <strong style={styles.userName}>{profile.first_name} {profile.last_name}</strong>
+       
       </Link>
+      <strong style={styles.userName}>{profile.first_name} {profile.last_name}</strong>
       <span style={styles.commentText}>{c.comment}</span>
     </div>
   );
