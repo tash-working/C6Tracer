@@ -13,6 +13,7 @@ import SelectProfile from "./components/SelectProfile";
 import Trade from "./components/Trade";
 import Donate from "./components/Donate";
 import SeeImages from "./components/SeeImages"; // Import SeeImages component
+import SocialMediaPosts from "./components/SocialMediaPosts";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         {/* Routes that do not require authentication (login/signup) */}
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/sample" element={<SocialMediaPosts />} />
       </Routes>
     </BrowserRouter>
   );

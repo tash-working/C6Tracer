@@ -23,7 +23,7 @@ function CarbonFootprintCalculator({ plasticData }) {
   useEffect(() => {
     const fetchId = async () => {
       try {
-        const response = await fetch(`https://server-08ld.onrender.com/${userId}/get_id`);
+        const response = await fetch(`https://c6-tracer.vercel.app/${userId}/get_id`);
         if (!response.ok) {
           throw new Error("Failed to fetch profile data");
         }
@@ -65,7 +65,7 @@ function CarbonFootprintCalculator({ plasticData }) {
         }
       });
 
-      const response = await fetch(`https://server-08ld.onrender.com/${userId}/updatePlasticData`, {
+      const response = await fetch(`https://c6-tracer.vercel.app/${userId}/updatePlasticData`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedData),

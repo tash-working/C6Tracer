@@ -16,7 +16,7 @@ const OthersDrafts = ({ userId }) => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`https://server-08ld.onrender.com/${userId}/api/posts`);
+        const response = await fetch(`https://c6-tracer.vercel.app/${userId}/api/posts`);
         if (!response.ok) {
           throw new Error("Failed to fetch posts");
         }

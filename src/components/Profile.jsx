@@ -25,7 +25,7 @@ const Profile = ({ userId }) => {
   const fetchId = async () => {
     try {
       const response = await fetch(
-        `https://server-08ld.onrender.com/${userId}/get_id`
+        `https://c6-tracer.vercel.app/${userId}/get_id`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch profile data");

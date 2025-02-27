@@ -29,7 +29,7 @@ const MyDrafts = () => {
 
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`https://server-08ld.onrender.com/${userId}/api/posts`);
+        const response = await fetch(`https://c6-tracer.vercel.app/${userId}/api/posts`);
         if (!response.ok) {
           throw new Error("Failed to fetch posts");
         }
@@ -52,7 +52,7 @@ const MyDrafts = () => {
     if (!isConfirmed) return;
 
     try {
-      const response = await fetch(`https://server-08ld.onrender.com/${userId}/api/posts/${postId}`, {
+      const response = await fetch(`https://c6-tracer.vercel.app/${userId}/api/posts/${postId}`, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -76,7 +76,7 @@ const MyDrafts = () => {
   const handleSaveClick = async (postId) => {
     try {
       const response = await fetch(
-        `https://server-08ld.onrender.com/${userId}/api/posts/${postId}`,
+        `https://c6-tracer.vercel.app/${userId}/api/posts/${postId}`,
         {
           method: "PUT",
           headers: {

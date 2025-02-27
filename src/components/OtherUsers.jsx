@@ -8,7 +8,7 @@ const OtherUsers = ({ id }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`https://server-08ld.onrender.com/${id}/get_id`);
+        const response = await fetch(`https://c6-tracer.vercel.app/${id}/get_id`);
         if (!response.ok) {
           throw new Error("Failed to fetch profile data");
         }
@@ -43,7 +43,7 @@ const styles = {
     alignItems: "center",
     padding: "12px",
     borderRadius: "8px",
-    boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
+   
     backgroundColor: "#fff",
     width: "fit-content",
     gap: "12px",
