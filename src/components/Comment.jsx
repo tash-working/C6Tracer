@@ -13,7 +13,7 @@ const Comment = ({ c, postId, userId, onDelete, onEdit }) => {
 
   const fetchId = async () => {
     try {
-      const response = await fetch(`https://c6-tracer.vercel.app/${c.userId}/get_id`);
+      const response = await fetch(`https://server-08ld.onrender.com/${c.userId}/get_id`);
       if (!response.ok) {
         throw new Error("Failed to fetch profile data");
       }
@@ -48,7 +48,7 @@ const Comment = ({ c, postId, userId, onDelete, onEdit }) => {
 
   const handleEdit = async () => {
     try {
-      const response = await fetch(`https://c6-tracer.vercel.app/${userId}/api/posts/${postId}/comment/${c.commentId}`, {
+      const response = await fetch(`https://server-08ld.onrender.com/${userId}/api/posts/${postId}/comment/${c.commentId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ comment: editedComment }),
@@ -68,7 +68,7 @@ const Comment = ({ c, postId, userId, onDelete, onEdit }) => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`https://c6-tracer.vercel.app/${userId}/api/posts/${postId}/comment/${c.commentId}`, {
+      const response = await fetch(`https://server-08ld.onrender.com/${userId}/api/posts/${postId}/comment/${c.commentId}`, {
         method: "DELETE",
       });
 

@@ -91,7 +91,7 @@ const Editor = () => {
       }
 
       // Send content and image URLs to the backend
-      const response = await fetch(`https://c6-tracer.vercel.app/${userId}/api/posts`, {
+      const response = await fetch(`https://server-08ld.onrender.com/${userId}/api/posts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -30,7 +30,7 @@ const MyProfile = () => {
   // Fetch profile data
   const fetchId = async () => {
     try {
-      const response = await fetch(`https://c6-tracer.vercel.app/${userId}/get_id`);
+      const response = await fetch(`https://server-08ld.onrender.com/${userId}/get_id`);
       if (!response.ok) {
         throw new Error("Failed to fetch profile data");
       }
@@ -132,7 +132,7 @@ const MyProfile = () => {
   // Send the uploaded image URL to the backend
   const sendUrlToBackend = async (imageUrl) => {
     try {
-      const response = await fetch(`https://c6-tracer.vercel.app/${userId}/uploadPP`, {
+      const response = await fetch(`https://server-08ld.onrender.com/${userId}/uploadPP`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -161,7 +161,7 @@ const MyProfile = () => {
   // Save edited profile data
   const handleSaveProfile = async () => {
     try {
-      const response = await fetch(`https://c6-tracer.vercel.app/${userId}/updateProfile`, {
+      const response = await fetch(`https://server-08ld.onrender.com/${userId}/updateProfile`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

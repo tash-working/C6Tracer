@@ -13,7 +13,7 @@ const LikeComment = ({ userId, post }) => {
   const handleLike = async () => {
     try {
       const response = await fetch(
-        `https://c6-tracer.vercel.app/${userId}/api/posts/${post._id}/like`,
+        `https://server-08ld.onrender.com/${userId}/api/posts/${post._id}/like`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -34,7 +34,7 @@ const LikeComment = ({ userId, post }) => {
     if (comment.trim() === "") return;
     try {
       const response = await fetch(
-        `https://c6-tracer.vercel.app/${userId}/api/posts/${post._id}/comment`,
+        `https://server-08ld.onrender.com/${userId}/api/posts/${post._id}/comment`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

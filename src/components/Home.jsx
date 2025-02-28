@@ -16,7 +16,7 @@ const Home = () => {
   // Fetch collections (user IDs) from the backend
   const fetchCollections = async () => {
     try {
-      const response = await fetch("https://c6-tracer.vercel.app/collections");
+      const response = await fetch("https://server-08ld.onrender.com/collections");
       if (!response.ok) {
         throw new Error("Failed to fetch collections");
       }
@@ -31,7 +31,7 @@ const Home = () => {
   // Fetch posts for a specific user ID
   const fetchPosts = async (collectionId) => {
     try {
-      const response = await fetch(`https://c6-tracer.vercel.app/${collectionId}/api/posts`);
+      const response = await fetch(`https://server-08ld.onrender.com/${collectionId}/api/posts`);
       if (!response.ok) {
         throw new Error(`Failed to fetch posts for collection ${collectionId}`);
       }
